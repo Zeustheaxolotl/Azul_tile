@@ -34,13 +34,15 @@ class Tile:
 
 
 class TileCircle:
-    def __init__(self, tiles):
-        self.tiles = tiles
+    def __init__(self):
+        self.tiles = []
 
 
     def calc_tiles(self):
         random.shuffle(tile_bag)
-        for z
+        for x in range(4):
+            self.tiles.append(tile_bag[-1])
+            tile_bag.del(-1)
        #rnum = random.sample(range(0, len(tile_bag)), 4)
       # for z in rnum:
      #       rtile = tile_bag[z]
@@ -61,6 +63,7 @@ for x in range(0, 100, 1):
 
 print(tile_bag)
 TileCircles = []
+TileCircle_1=
 
 
 
