@@ -42,7 +42,7 @@ class TileCircle:
         random.shuffle(tile_bag)
         for x in range(4):
             self.tiles.append(tile_bag[-1])
-            tile_bag.del(-1)
+            del tile_bag[-1]
        #rnum = random.sample(range(0, len(tile_bag)), 4)
       # for z in rnum:
      #       rtile = tile_bag[z]
@@ -51,6 +51,9 @@ class TileCircle:
   #          self.tiles.append(rtile)
 #
 #           print(self.tiles)
+    def show(self):
+        for x in range(4):
+            print(self.tiles[x])
 
 
 for y in colors:
@@ -63,7 +66,9 @@ for x in range(0, 100, 1):
 
 print(tile_bag)
 TileCircles = []
-TileCircle_1=
+TileCircle_1= TileCircle()
+TileCircle_1.calc_tiles()
+TileCircle_1.show()
 
 
 
