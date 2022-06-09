@@ -9,7 +9,7 @@ class TileColor(Enum):
 
 class Tile:
 
-    def __init__(self, location, color):
+    def __init__(self, location, color: TileColor):
         self.color = color #what kind is the tile
         self.location = location #where is the tile bag circle or playerboard
 
