@@ -20,15 +20,15 @@ class Overflow():
         return self.oldtiles
 
 
-    def score(self):
+    def calc_score(self):
         if self.tilenum < 3:
             self.score = self.tilenum*-1
         elif self.tilenum < 6:
             self.score = (self.tilenum-1)*-2
         elif self.tilenum == 6:
-            self.score = 11
+            self.score = -11
         else:
-            self.score = 14
+            self.score = -14
         print(self.score)
 
 if __name__=="__main__":
@@ -37,5 +37,5 @@ if __name__=="__main__":
     overflow_1= Overflow()
     overflow_1.placeTile(prac)
     overflow_1.placeTile(prac1)
-    overflow_1.Score()
+    overflow_1.calc_score()
     overflow_1.removeTile()
