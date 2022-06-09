@@ -20,19 +20,19 @@ row = False
 
 
 
-for y in colors:
-    for x in range(0, 20, 1):
-        new_tile = Tile("tile bag", y)
-        total_tiles.append(new_tile)
+#for y in colors:
+   # for x in range(0, 20, 1):
+       # new_tile = Tile("tile bag", y)
+      #  total_tiles.append(new_tile)
 
-for x in range(0, 100, 1):
-    total_tiles[x].re_tile_bag()
+#for x in range(0, 100, 1):
+   # total_tiles[x].re_tile_bag()
 
-print(tile_bag)
-TileCircles = []
-TileCircle_1= TileCircle()
-TileCircle_1.calc_tiles()
-TileCircle_1.show()
+#print(tile_bag)
+#TileCircles = []
+#TileCircle_1= TileCircle()
+#TileCircle_1.calc_tiles()
+#TileCircle_1.show()
 
 
 
