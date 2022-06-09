@@ -16,44 +16,8 @@ round = 0
 row = False
 
 
-class Tile:
-
-    def __init__(self, location, color):
-        self.color = color #what kind is the tile
-        self.location = location #where is the tile bag circle or playerboard
-
-    def __str__(self):
-        return self.color + ", " + self.location #say what color and where tile is
-
-    def __repr__(self):
-        return str(self)
-
-    def re_tile_bag(self):
-        if self.location == "tile bag":
-            tile_bag.append(self.color)
 
 
-class TileCircle:
-    def __init__(self):
-        self.tiles = []
-
-
-    def calc_tiles(self):
-        random.shuffle(tile_bag)
-        for x in range(4):
-            self.tiles.append(tile_bag[-1])
-            del tile_bag[-1]
-       #rnum = random.sample(range(0, len(tile_bag)), 4)
-      # for z in rnum:
-     #       rtile = tile_bag[z]
-    #        rnums.append(z)
-   #         del tile_bag[z]
-  #          self.tiles.append(rtile)
-#
-#           print(self.tiles)
-    def show(self):
-        for x in range(4):
-            print(self.tiles[x])
 
 
 for y in colors:
