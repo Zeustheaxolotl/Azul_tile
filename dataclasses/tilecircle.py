@@ -13,34 +13,34 @@ class TileCircle:
         self.image = pygame.image.load('img/tile_circle_200x200.png')
 
     def draw_tiles_from_bag(self, num=4):
-        self.tiles.append(self.tile_bag.draw_tiles(num, "tile_circle"))
+        self.tiles=self.tile_bag.draw_tiles(num, "tile_circle")
 
     def show(self, screen, x, y):
         screen.blit(self.image, (x, y))
         if len(self.tiles) == 1:
-            screen.blit.self.tiles[1].show(screen, x + 100, y + 100)
-            print(self.tiles[1])
+            self.tiles[0].show(screen, x + 100, y + 100)
+            #print(self.tiles[0])
         if len(self.tiles) == 2:
-            screen.blit.self.tiles[1].show(screen, x + 40, y + 100)
-            print(self.tiles[1])
-            screen.blit.self.tiles[2].show(screen, x + 140, y + 100)
-            print(self.tiles[2])
+            self.tiles[1].show(screen, x + 40, y + 100)
+            #print(self.tiles[1])
+            self.tiles[0].show(screen, x + 140, y + 100)
+            #print(self.tiles[0])
         if len(self.tiles) == 3:
-            screen.blit.self.tiles[1].show(screen, x + 100, y + 40)
-            print(self.tiles[1])
-            screen.blit.self.tiles[2].show(screen, x + 40, y + 120)
-            print(self.tiles[2])
-            screen.blit.self.tiles[3].show(screen, x + 140, y + 120)
-            print(self.tiles[3])
+            self.tiles[1].show(screen, x + 100, y + 40)
+            #print(self.tiles[1])
+            self.tiles[2].show(screen, x + 40, y + 120)
+            #print(self.tiles[2])
+            self.tiles[0].show(screen, x + 140, y + 120)
+            #print(self.tiles[0])
         if len(self.tiles) == 4:
-            screen.blit.self.tiles[1].show(screen, x + 40, y + 40)
-            print(self.tiles[1])
-            screen.blit.self.tiles[2].show(screen, x + 40, y + 120)
-            print(self.tiles[2])
-            screen.blit.self.tiles[3].show(screen, x + 40, y + 120)
-            print(self.tiles[3])
-            screen.blit.self.tiles[4].show(screen, x + 140, y + 120)
-            print(self.tiles[4])
+            self.tiles[1].show(screen, x + 40, y + 40)
+            #print(self.tiles[1])
+            self.tiles[2].show(screen, x + 140, y + 40)
+            #print(self.tiles[2])
+            self.tiles[3].show(screen, x + 40, y + 120)
+            #print(self.tiles[3])
+            self.tiles[0].show(screen, x + 140, y + 120)
+            #print(self.tiles[0])
 
 
 if __name__ == "__main__":
