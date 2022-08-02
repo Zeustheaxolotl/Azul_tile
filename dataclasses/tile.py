@@ -17,7 +17,7 @@ class Tile:
         # where is the tile bag circle or player board
 
     def __str__(self):
-        return self.color + ", " + self.location=-0[],
+        return self.color + ", " + self.location
         # say what color and where tile is
 
     def show(self):
