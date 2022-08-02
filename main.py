@@ -4,6 +4,7 @@ import pygame
 import sys
 from dataclasses.tilebag import Tilebag
 from dataclasses.tilecircle import TileCircle
+from dataclasses.game import Game
 
 # from random import sample
 
@@ -37,14 +38,14 @@ tile_bag = Tilebag()
 tile_bag.make_tiles()
 tile_circle = TileCircle(tile_bag)
 tile_circle.draw_tiles_from_bag()
+screen_dim = (1200, 800)
 pygame.init()
-display = pygame.display.set_mode((1200, 800))
+display = pygame.display.set_mode(screen_dim)
 pygame.display.set_caption('Azul')
+game = Game(display, screen_dim)
 while True:  # main game loop
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-    #tile_circle.draw_tiles_from_bag(4)
-    tile_circle.show(display, 100, 50)
+    game.listen()
+    # tile_circle.draw_tiles_from_bag(4)
+    # tile_circle.show(display, 100, 50)
+    game.show()
     pygame.display.update()
