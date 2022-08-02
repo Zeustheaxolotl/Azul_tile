@@ -7,6 +7,7 @@ class TileColor(Enum):
     TEAL=4
     YELLOW=5
 
+
 class Tile:
 
     def __init__(self, location, color):
