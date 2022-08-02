@@ -1,6 +1,7 @@
 import random
-import pygame, sys
-from tilebag import Tilebag
+import pygame
+import sys
+from dataclasses.tilebag import Tilebag
 from pygame.locals import *
 
 
@@ -8,7 +9,7 @@ class TileCircle:
     def __init__(self, tile_bag: Tilebag):
         self.tile_bag = tile_bag
         self.tiles = []
-        self.image = pygame.image.load('../img/tile_circle_200x200.png')
+        self.image = pygame.image.load('/Users/mbardoe/PycharmProjects/Azul_tile/img/tile_circle_200x200.png')
 
     def draw_tiles_from_bag(self, num=4):
         self.tiles.append(self.tile_bag.draw_tiles(num, "tile_circle"))

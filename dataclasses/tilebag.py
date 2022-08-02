@@ -1,5 +1,5 @@
 import random
-from tile import Tile
+from dataclasses.tile import Tile
 
 
 class Tilebag:
