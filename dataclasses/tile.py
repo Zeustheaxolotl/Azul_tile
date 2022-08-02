@@ -7,6 +7,7 @@ class TileColor(Enum):
     TEAL=4
     YELLOW=5
 
+
 class Tile:
 
     def __init__(self, location, color):
@@ -16,7 +17,7 @@ class Tile:
         # where is the tile bag circle or player board
 
     def __str__(self):
-        return self.color + ", " + self.location
+        return self.color + ", " + self.location=-0[],
         # say what color and where tile is
 
     def show(self):
