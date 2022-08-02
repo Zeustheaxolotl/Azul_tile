@@ -45,7 +45,7 @@ if __name__ == "__main__":
     tile_bag = Tilebag()
     tile_bag.make_tiles()
     tile_circle = TileCircle(tile_bag)
-    tile_circle.draw_tiles_from_bag()
+    #tile_circle.draw_tiles_from_bag()
 
     pygame.init()
     display = pygame.display.set_mode((400, 300))
@@ -55,5 +55,5 @@ if __name__ == "__main__":
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-        tile_circle.show(display, 100, 100)
+        tile_circle.show(display, 100, 50)
         pygame.display.update()
