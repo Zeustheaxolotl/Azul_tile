@@ -1,4 +1,8 @@
 from enum import Enum
+import pygame
+import os
+import sys
+
 
 class TileColor(Enum):
     RED = 1
@@ -10,40 +14,41 @@ class TileColor(Enum):
 
 class Tile:
 
-    def __init__(self, location, color):
+    def __init__(self, location, color, image):
         self.color = color
         # what kind is the tile
         self.location = location
         # where is the tile bag circle or player board
+        self.image = pygame.image.load(image)
 
     def __str__(self):
         return self.color + ", " + self.location
         # say what color and where tile is
 
-    def show(self):
-        pass
+    def __eq__(self, other):
+        return self.color == other.color
 
-    class Tile:
-
-        def __init__(self, location, color):
-            self.color = color
-            # what kind is the tile
-            self.location = location
-            # where is the tile bag circle or player board
-
-        def __str__(self):
-            return self.color + ", " + self.location
-            # say what color and where tile is
-
-        def show(self):
-            pass
-
-        def reset_location(self, new_location):
+    def reset_location(self, new_location):
             self.location = new_location
 
-        def __eq__(self, other):
-            return self.color==other.color
+    def show(self, screen, x, y):
+        screen.blit(self.image, (x, y))
 
-        # def re_tile_bag(self):
-        #     if self.location == "tile bag":
-        #         tile_bag.append(self.color)
+if __name__ == "__main__":
+    #tile_bag = Tilebag()
+    #tile_bag.make_tiles()
+    os.chdir("../")  # find the images
+    tile=Tile("nowhere","blue", "img/Blue_Tile.png")
+    #tile_circle = TileCircle(tile_bag)
+    #tile_circle.draw_tiles_from_bag()
+
+    pygame.init()
+    display = pygame.display.set_mode((400, 300))
+    pygame.display.set_caption('Hello World!')
+    while True:  # main game loop
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+        tile.show(display, 100, 50)
+        pygame.display.update()

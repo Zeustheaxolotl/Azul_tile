@@ -36,6 +36,7 @@ from dataclasses.tilecircle import TileCircle
 tile_bag = Tilebag()
 tile_bag.make_tiles()
 tile_circle = TileCircle(tile_bag)
+tile_circle.draw_tiles_from_bag()
 pygame.init()
 display = pygame.display.set_mode((1200, 800))
 pygame.display.set_caption('Azul')
@@ -44,5 +45,6 @@ while True:  # main game loop
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+    #tile_circle.draw_tiles_from_bag(4)
     tile_circle.show(display, 100, 50)
     pygame.display.update()
