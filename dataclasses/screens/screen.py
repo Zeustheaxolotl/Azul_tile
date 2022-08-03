@@ -2,7 +2,7 @@ import pygame
 import sys
 
 
-class Screen():
+class Screen:
 
     def __init__(self, game):
         self.display = game.display

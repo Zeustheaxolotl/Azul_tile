@@ -11,7 +11,7 @@ class NameEntry(Screen):
 
     def __init__(self, game):
         super().__init__(game)
-
+        self.input_rect = None
         self.user_text = ''
 
     def show(self):
@@ -53,12 +53,6 @@ class NameEntry(Screen):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.input_rect.collidepoint(event.pos):
-                    self.active = True
-                else:
-                    self.active = False
 
             if event.type == pygame.KEYDOWN:
 
