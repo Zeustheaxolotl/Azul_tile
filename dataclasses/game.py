@@ -1,5 +1,7 @@
 from dataclasses.screens.numberplayersscreen import NumberPlayersScreen
+from dataclasses.screens.nameentry import NameEntry
 from dataclasses.gamestage import GameStage
+from dataclasses.player import Player
 import pygame
 import sys
 
@@ -16,7 +18,8 @@ class Game():
         self.game_stage = GameStage.NUMBER_OF_PLAYERS
         self.display = display
         self.screen_dim = screen_dim
-        self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self)}
+        self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self), GameStage.PLAYER_NAMES: NameEntry(self)}
+        self.players = []
 
     def listen(self):
         self.screens[self.game_stage].listen()
@@ -24,8 +27,11 @@ class Game():
     def show(self):
         self.screens[self.game_stage].show()
 
-    def number_of_players(self):
+    def get_number_of_players(self):
         return self.number_of_players
 
-    def players(self):
+    def get_players(self):
         return self.players
+
+    def add_player(self, name):
+        self.players.append(Player(name))

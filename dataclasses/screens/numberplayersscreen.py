@@ -19,9 +19,9 @@ class NumberPlayersScreen(Screen):
         text_second_line = font_small.render('3 players - press 3', True, white)
         text_third_line = font_small.render('4 players - press 4', True, white)
         text_rect_top_line = text_top_line.get_rect(center=(self.screen_dim[0] / 2, 300))
-        text_rect_first_line = text_first_line.get_rect(center=(self.screen_dim[0] / 2, 340))
-        text_rect_second_line = text_second_line.get_rect(center=(self.screen_dim[0] / 2, 370))
-        text_rect_third_line = text_third_line.get_rect(center=(self.screen_dim[0] / 2, 400))
+        text_rect_first_line = text_first_line.get_rect(center=(self.screen_dim[0] / 2, 350))
+        text_rect_second_line = text_second_line.get_rect(center=(self.screen_dim[0] / 2, 390))
+        text_rect_third_line = text_third_line.get_rect(center=(self.screen_dim[0] / 2, 430))
 
         self.display.blit(text_top_line, text_rect_top_line)
         self.display.blit(text_first_line, text_rect_first_line)
