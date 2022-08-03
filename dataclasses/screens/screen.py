@@ -1,6 +1,15 @@
+import sys
 from abc import ABC, abstractmethod
 
+import pygame
+
 from dataclasses.game import Game
+
+
+def exit_check(my_event):
+    if my_event.type == pygame.QUIT:
+        pygame.quit()
+        sys.exit()
 
 
 class Screen(ABC):
@@ -17,7 +26,3 @@ class Screen(ABC):
     @abstractmethod
     def listen(self):
         pass
-    # for event in pygame.event.get():
-    #     if event.type == pygame.QUIT:
-    #         pygame.quit()
-    #         sys.exit()

@@ -1,4 +1,4 @@
-from dataclasses.screens.screen import Screen
+from dataclasses.screens.screen import Screen, exit_check
 from dataclasses.gamestage import GameStage
 import pygame
 import sys
@@ -30,9 +30,8 @@ class NumberPlayersScreen(Screen):
 
     def listen(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+            exit_check(event)
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_2:
                     print("2 players")

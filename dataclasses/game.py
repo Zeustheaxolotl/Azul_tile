@@ -15,10 +15,12 @@ class Game:
         self.game_stage = GameStage.NUMBER_OF_PLAYERS
         self.display = display
         self.screen_dim = screen_dim
-        self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self), GameStage.PLAYER_NAMES: NameEntry(self)}
+        self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
+                        GameStage.PLAYER_NAMES: NameEntry(self)}
         self.players = []
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
+        self.player_name_entry = 0
         # tile_circle = TileCircle(tile_bag)
         # tile_circle.draw_tiles_from_bag()
 

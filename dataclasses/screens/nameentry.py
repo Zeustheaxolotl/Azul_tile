@@ -1,8 +1,7 @@
-from dataclasses.screens.screen import Screen
-from dataclasses.gamestage import GameStage
-
 import pygame
-import sys
+
+from dataclasses.gamestage import GameStage
+from dataclasses.screens.screen import Screen, exit_check
 
 white = (255, 255, 255)
 
@@ -50,9 +49,7 @@ class NameEntry(Screen):
         for event in pygame.event.get():
 
             # if user types QUIT then the screen will close
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+            exit_check(event)
 
             if event.type == pygame.KEYDOWN:
 
