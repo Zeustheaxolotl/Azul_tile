@@ -8,6 +8,7 @@ pygame.init()
 display = pygame.display.set_mode(screen_dim)
 pygame.display.set_caption('Azul')
 game = Game(display, screen_dim)
+
 while True:  # main game loop
     game.listen()
     # tile_circle.draw_tiles_from_bag(4)

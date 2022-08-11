@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 import pygame
 
-from dataclasses.game import Game
+#from dataclasses.game import Game
 
 
 def exit_check(my_event):
@@ -14,7 +14,8 @@ def exit_check(my_event):
 
 class Screen(ABC):
 
-    def __init__(self, game: Game):
+    def __init__(self, game):
+
         self.display = game.display
         self.screen_dim = game.screen_dim
         self.game = game

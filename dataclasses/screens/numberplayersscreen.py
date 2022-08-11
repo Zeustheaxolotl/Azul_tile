@@ -1,6 +1,7 @@
 from dataclasses.screens.screen import Screen, exit_check
 from dataclasses.gamestage import GameStage
 import pygame
+from dataclasses.screens.Game_center import Game_Center
 
 white = (255, 255, 255)
 
@@ -35,6 +36,7 @@ class NumberPlayersScreen(Screen):
                 if event.key == pygame.K_2:
                     print("2 players")
                     self.game.number_of_players = 2
+
                 if event.key == pygame.K_3:
                     print("3 players")
                     self.game.number_of_players = 3
@@ -43,3 +45,8 @@ class NumberPlayersScreen(Screen):
                     self.game.number_of_players = 4
                 self.game.game_stage = GameStage.PLAYER_NAMES
                 self.game.player_name_entry = 0
+                self.game.make_tilebag()
+                self.game.make_tilecircles()
+
+
+

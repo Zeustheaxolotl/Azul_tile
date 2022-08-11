@@ -19,9 +19,10 @@ class Tilebag:
 
     def draw_tiles(self, num, location):
         drawn_tiles = []
-        # print('here')
+        print(len(self.tiles))
         for z in range(num):
-            i = random.randint(0, len(self.tiles))
+            i = random.randint(0, len(self.tiles)-1)
+            #print('here')
             self.tiles[i].reset_location(location)
             drawn_tiles.append(self.tiles[i])
             # print(self.tiles[i].__str__())
