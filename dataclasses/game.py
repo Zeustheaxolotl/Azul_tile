@@ -3,6 +3,7 @@ from dataclasses.player import Player
 from dataclasses.screens.nameentry import NameEntry
 from dataclasses.screens.numberplayersscreen import NumberPlayersScreen
 from dataclasses.tilebag import Tilebag
+from dataclasses.screens.Game_center import Game_Center
 
 white = (255, 255, 255)
 
