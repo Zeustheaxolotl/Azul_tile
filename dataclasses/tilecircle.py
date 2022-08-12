@@ -5,6 +5,7 @@ import pygame
 from pygame.locals import *
 
 from dataclasses.tilebag import Tilebag
+from dataclasses.screens.screen import Screen, exit_check
 
 
 class TileCircle:
@@ -43,21 +44,61 @@ class TileCircle:
             self.tiles[0].show(screen, x + 140, y + 120)
             # print(self.tiles[0])
 
+    def collide_tiles(self, x, y):
+        for tile in self.tiles:
+            if tile.collide_tile(x, y):
+                return tile
+        return None
 
-if __name__ == "__main__":
-    os.chdir("../")  # this is to get the images to work
-    tile_bag = Tilebag()
-    tile_bag.make_tiles()
-    tile_circle = TileCircle(tile_bag)
-    # tile_circle.draw_tiles_from_bag()
 
-    pygame.init()
-    display = pygame.display.set_mode((400, 300))
-    pygame.display.set_caption('Hello World!')
-    while True:  # main game loop
+class Test_Tile_Circle_Screen(Screen):
+
+    def __init__(self, screen, tile_circle):
+        self.display = screen
+        # self.screen_dim = game.screen_dim
+        # self.game = game
+        self.tile_circle = tile_circle
+        self.tiles = []
+
+    def show(self):
+        # print("here")
+        self.tile_circle.show(self.display, 400, 300)
+        for tile in self.tiles:
+            x, y = pygame.mouse.get_pos()
+            tile.show(self.display, x - 15, y - 15)
+
+    def listen(self):
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-        tile_circle.show(display, 100, 50)
+
+            if event.type == MOUSEBUTTONDOWN:
+                print(event.pos)
+                x, y = event.pos
+                hit_tile = self.tile_circle.collide_tiles(x, y)
+                if hit_tile:
+                    print(hit_tile)
+                    self.tile_circle.tiles.remove(hit_tile)
+                    hit_tile.location = "chosen"
+                    self.tiles.append(hit_tile)
+
+
+if __name__ == "__main__":
+    # os.chdir("../")  # this is to get the images to work
+    print(os.getcwd())
+    tile_bag = Tilebag()
+    tile_bag.make_tiles()
+    tile_circle = TileCircle(tile_bag)
+    tile_circle.draw_tiles_from_bag()
+
+    pygame.init()
+    display = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption('Tile Screen Test')
+    TC_screen = Test_Tile_Circle_Screen(display, tile_circle)
+    while True:  # main game loop
+        display.fill((0, 0, 0))
+        TC_screen.show()
+        TC_screen.listen()
+
         pygame.display.update()

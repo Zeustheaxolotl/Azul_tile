@@ -15,31 +15,40 @@ class TileColor(Enum):
 
 class Tile:
 
-    def __init__(self, location, color, image):
+    def __init__(self, location, color, image, number):
         self.color = color
         # what kind is the tile
         self.location = location
         # where is the tile bag circle or player board
         self.image = pygame.image.load(image)
+        self.rect = None
+        self.number = number
 
     def __str__(self):
         return self.color + ", " + self.location
         # say what color and where tile is
 
     def __eq__(self, other):
-        return self.color == other.color
+        return (self.number == other.number) and (self.color == other.color)
 
     def reset_location(self, new_location):
         self.location = new_location
 
     def show(self, screen, x, y):
-        screen.blit(self.image, (x, y))
+        self.rect = screen.blit(self.image, (x, y))
+
+    def get_rect(self):
+        return self.rect
+
+    def collide_tile(self, x, y):
+        return self.rect.collidepoint(x, y)
 
 
 if __name__ == "__main__":
     # tile_bag = Tilebag()
     # tile_bag.make_tiles()
     os.chdir("../")  # find the images
+    print(os.getcwd())
     tile = Tile("nowhere", "blue", "img/Blue_Tile.png")
     # tile_circle = TileCircle(tile_bag)
     # tile_circle.draw_tiles_from_bag()
