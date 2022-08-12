@@ -73,7 +73,7 @@ class NameEntry(Screen):
                     if self.game.player_name_entry == self.game.get_number_of_players():
                         for i in range(self.game.get_number_of_players(), 1, -1):
                             self.game.get_players()[i - 2].add_next_player(self.game.get_players()[i - 1])
-                        self.game.game_stage = GameStage.ROUND_BEGIN
+                        self.game.game_stage = GameStage.GAME_CENTER
 
                 else:
                     self.user_text += event.unicode

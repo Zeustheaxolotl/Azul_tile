@@ -17,7 +17,8 @@ class Game:
         self.screen_dim = screen_dim
         self.tilecircles = []
         self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
-                        GameStage.PLAYER_NAMES: NameEntry(self)}
+                        GameStage.PLAYER_NAMES: NameEntry(self),
+                        GameStage.GAME_CENTER: Game_Center(self, self.tilecircles, self.number_of_players)}
         self.players = []
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
