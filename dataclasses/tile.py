@@ -25,7 +25,7 @@ class Tile:
         self.number = number
 
     def __str__(self):
-        return self.color + ", " + self.location
+        return self.color + ", " + self.location + ", " + str(self.number)
         # say what color and where tile is
 
     def __eq__(self, other):

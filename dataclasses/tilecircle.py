@@ -67,9 +67,12 @@ class Test_Tile_Circle_Screen(Screen):
     def show(self):
         # print("here")
         self.tile_circle.show(self.display, 400, 300)
+        offset_x = -15
+        offset_y = -15
         for tile in self.tiles:
             x, y = pygame.mouse.get_pos()
-            tile.show(self.display, x - 15, y - 15)
+            tile.show(self.display, x + offset_x, y + offset_y)
+            offset_x += 45
 
     def listen(self):
         for event in pygame.event.get():
@@ -82,23 +85,26 @@ class Test_Tile_Circle_Screen(Screen):
                 x, y = event.pos
                 hit_circle = self.tile_circle.collide_tile_circle(x, y)
                 hit_tile = self.tile_circle.collide_tiles(x, y)
-                if hit_circle and len(self.tiles) == 1:
-                    self.tiles[0].location = "tile circle"
-                    self.tile_circle.tiles.append(self.tiles[0])
+                if hit_circle and len(self.tiles) > 0:
+                    for tile in self.tiles:
+                        tile.location = "tile circle"
+                        self.tile_circle.tiles.append(tile)
                     self.tiles.clear()
 
-                if hit_tile and len(self.tiles) < 1:
+                if hit_tile and len(self.tiles) == 0:
                     print(hit_tile)
-                    self.tile_circle.tiles.remove(hit_tile)
-                    hit_tile.location = "chosen"
-                    self.tiles.append(hit_tile)
-
+                    for tile in self.tile_circle.tiles:
+                        if tile.color == hit_tile.color:
+                            tile.location = "chosen"
+                            self.tiles.append(tile)
+                    for tile in self.tiles:
+                        self.tile_circle.tiles.remove(tile)
 
 
 
 if __name__ == "__main__":
     # os.chdir("../")  # this is to get the images to work
-    print(os.getcwd())
+    # print(os.getcwd())
     tile_bag = Tilebag()
     tile_bag.make_tiles()
     tile_circle = TileCircle(tile_bag)

@@ -1,6 +1,7 @@
 from dataclasses.screens.screen import Screen, exit_check
 from dataclasses.gamestage import GameStage
 import pygame
+from dataclasses.screens.Game_center import Game_Center
 
 white = (255, 255, 255)
 
