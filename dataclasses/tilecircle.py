@@ -13,12 +13,13 @@ class TileCircle:
         self.tile_bag = my_tile_bag
         self.tiles = []
         self.image = pygame.image.load('img/tile_circle_200x200.png')
+        self.rect = None
 
     def draw_tiles_from_bag(self, num=4):
         self.tiles = self.tile_bag.draw_tiles(num, "tile_circle")
 
     def show(self, screen, x, y):
-        screen.blit(self.image, (x, y))
+        self.rect = screen.blit(self.image, (x, y))
         if len(self.tiles) == 1:
             self.tiles[0].show(screen, x + 100, y + 100)
             # print(self.tiles[0])
@@ -50,6 +51,9 @@ class TileCircle:
                 return tile
         return None
 
+    def collide_tile_circle(self, x, y):
+        return self.rect.collidepoint(x, y)
+
 
 class Test_Tile_Circle_Screen(Screen):
 
@@ -76,12 +80,20 @@ class Test_Tile_Circle_Screen(Screen):
             if event.type == MOUSEBUTTONDOWN:
                 print(event.pos)
                 x, y = event.pos
+                hit_circle = self.tile_circle.collide_tile_circle(x, y)
                 hit_tile = self.tile_circle.collide_tiles(x, y)
-                if hit_tile:
+                if hit_circle and len(self.tiles) == 1:
+                    self.tiles[0].location = "tile circle"
+                    self.tile_circle.tiles.append(self.tiles[0])
+                    self.tiles.clear()
+
+                if hit_tile and len(self.tiles) < 1:
                     print(hit_tile)
                     self.tile_circle.tiles.remove(hit_tile)
                     hit_tile.location = "chosen"
                     self.tiles.append(hit_tile)
+
+
 
 
 if __name__ == "__main__":
