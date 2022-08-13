@@ -44,3 +44,5 @@ class NumberPlayersScreen(Screen):
                     self.game.number_of_players = 4
                 self.game.game_stage = GameStage.PLAYER_NAMES
                 self.game.player_name_entry = 0
+                self.game.make_tilebag()
+                self.game.make_tilecircles()
