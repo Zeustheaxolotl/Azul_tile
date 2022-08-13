@@ -71,6 +71,7 @@ class NameEntry(Screen):
                     self.user_text = ''
                     # check if we need to move on to the next stage.
                     if self.game.player_name_entry == self.game.get_number_of_players():
+                        print("All players")
                         for i in range(self.game.get_number_of_players(), 1, -1):
                             self.game.get_players()[i - 2].add_next_player(self.game.get_players()[i - 1])
                         self.game.game_stage = GameStage.GAME_CENTER

@@ -11,7 +11,7 @@ class Game_Center(Screen):
         super().__init__(game)
         self.circles = circles
         self.number_of_players = number_of_players
-        # print('here')
+        print('here')
 
     def reset_num_of_players(self, number_of_players):
         pass
@@ -28,3 +28,25 @@ class Game_Center(Screen):
     def listen(self):
         for event in pygame.event.get():
             exit_check(event)
+
+
+if __name__ == "__main__":
+    # os.chdir("../")  # this is to get the images to work
+    # print(os.getcwd())
+    tile_bag = Tilebag()
+    tile_bag.make_tiles()
+    tile_circle = TileCircle(tile_bag)
+    tile_circle.draw_tiles_from_bag()
+
+    pygame.init()
+    screen_dim = (1200, 800)
+    display = pygame.display.set_mode(screen_dim)
+    pygame.display.set_caption('Tile Screen Test')
+    game = Game(display, screen_dim)
+    GC_screen = Game_Center(display, tile_circle)
+    while True:  # main game loop
+        display.fill((0, 0, 0))
+        TC_screen.show()
+        TC_screen.listen()
+
+        pygame.display.update()
