@@ -18,12 +18,14 @@ class Game:
         self.display = display
         self.screen_dim = screen_dim
         self.tilecircles = []
+        self.selected_tiles = []
         self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
                         GameStage.PLAYER_NAMES: NameEntry(self),
                         GameStage.GAME_CENTER: Game_Center(self, self.tilecircles, self.number_of_players)}
         self.players = []
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
+        self.center_circle = TileCircle(self.tile_bag, type="blank")
         self.player_name_entry = 0
         # tile_circle = TileCircle(tile_bag)
         # tile_circle.draw_tiles_from_bag()
@@ -47,22 +49,9 @@ class Game:
         self.tile_bag.make_tiles()
 
     def make_tilecircles(self):
-        if self.number_of_players == 2:
-            for x in range(5):
-                new_circle = TileCircle(self.tile_bag)
+        for x in range(2 * self.number_of_players + 1):
+            new_circle = TileCircle(self.tile_bag)
 
-                # print("HERE!!!")
-                self.tilecircles.append(new_circle)
-                self.tilecircles[x].draw_tiles_from_bag()
-
-        elif self.number_of_players == 3:
-            for x in range(7):
-                new_circle = TileCircle(self.tile_bag)
-                self.tilecircles.append(new_circle)
-                self.tilecircles[x].draw_tiles_from_bag()
-
-        elif self.number_of_players == 4:
-            for x in range(9):
-                new_circle = TileCircle(self.tile_bag)
-                self.tilecircles.append(new_circle)
-                self.tilecircles[x].draw_tiles_from_bag()
+            # print("HERE!!!")
+            self.tilecircles.append(new_circle)
+            self.tilecircles[x].draw_tiles_from_bag()
