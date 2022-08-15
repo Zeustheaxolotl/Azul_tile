@@ -1,5 +1,6 @@
 import os
 import sys
+import random
 
 import pygame
 from pygame.locals import *
@@ -9,41 +10,30 @@ from dataclasses.screens.screen import Screen, exit_check
 
 
 class TileCircle:
-    def __init__(self, my_tile_bag: Tilebag):
+    def __init__(self, my_tile_bag: Tilebag, type="disk"):
         self.tile_bag = my_tile_bag
         self.tiles = []
         self.image = pygame.image.load('img/tile_circle_200x200.png')
         self.rect = None
+        self.type = type
+        self.positions = [(80, 0), (40, 40), (80, 40), (120, 40), (0, 80), (40, 80), (80, 80), (120, 80), (160, 80),
+                          (40, 120), (80, 120), (120, 120), (80, 160)]
+        if self.type == "blank":
+            self.positions += [(0, 0), (40, 0), (120, 0), (160, 0), (0, 40), (160, 40), (0, 120), (160, 120),
+                               (0, 160), (40, 160), (120, 160), (160, 160)]
 
     def draw_tiles_from_bag(self, num=4):
         self.tiles = self.tile_bag.draw_tiles(num, "tile_circle")
 
     def show(self, screen, x, y):
-        self.rect = screen.blit(self.image, (x, y))
-        if len(self.tiles) == 1:
-            self.tiles[0].show(screen, x + 100, y + 100)
-            # print(self.tiles[0])
-        if len(self.tiles) == 2:
-            self.tiles[1].show(screen, x + 40, y + 100)
-            # print(self.tiles[1])
-            self.tiles[0].show(screen, x + 140, y + 100)
-            # print(self.tiles[0])
-        if len(self.tiles) == 3:
-            self.tiles[1].show(screen, x + 100, y + 40)
-            # print(self.tiles[1])
-            self.tiles[2].show(screen, x + 40, y + 120)
-            # print(self.tiles[2])
-            self.tiles[0].show(screen, x + 140, y + 120)
-            # print(self.tiles[0])
-        if len(self.tiles) == 4:
-            self.tiles[1].show(screen, x + 40, y + 40)
-            # print(self.tiles[1])
-            self.tiles[2].show(screen, x + 140, y + 40)
-            # print(self.tiles[2])
-            self.tiles[3].show(screen, x + 40, y + 120)
-            # print(self.tiles[3])
-            self.tiles[0].show(screen, x + 140, y + 120)
-            # print(self.tiles[0])
+        if self.type == "disk":
+            self.rect = screen.blit(self.image, (x, y))
+        for tile in self.tiles:
+            if not tile.offset:
+                offset = random.sample(self.positions, 1)
+                tile.set_offset(offset[0])
+                self.positions.remove(offset[0])
+            tile.show(screen, x, y)
 
     def collide_tiles(self, x, y):
         for tile in self.tiles:
@@ -71,6 +61,8 @@ class TileCircle:
                     matching_tiles = []
                     unmatching_tiles = []
                     for tile in self.tiles:
+                        self.positions.append(tile.offset)
+                        tile.set_offset(None)
                         if tile.color == hit_tile.color:
                             matching_tiles.append(tile)
                         else:
@@ -141,7 +133,6 @@ class Test_Tile_Circle_Screen(Screen):
             #                 self.tiles.append(tile)
             #         for tile in self.tiles:
             #             self.tile_circle.tiles.remove(tile)
-
 
 
 if __name__ == "__main__":
