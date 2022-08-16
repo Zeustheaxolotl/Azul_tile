@@ -30,8 +30,7 @@ class CollectionArea:
 
     def show(self, screen, x, y):
         """
-        Draw the Collection Area. Do this by drawing individual tile rows.
-
+        Draw the Collection Area. Do this by drawing individual tile rows
         :param screen: A place to display the information
         :param x: the x-coordinate of the top left corner of the collection area
         :param y: The y-coordinate of the top left corner of the collection area
@@ -44,7 +43,7 @@ class CollectionArea:
 
     def listen(self, event):
         """
-        Handle events and see if there was a click in the collection area.
+        Handle events and see if there was a click in the collection area
         :param event: a pygame event
         :return:
         """
@@ -53,14 +52,13 @@ class CollectionArea:
     def end_of_round(self):
         """
         Clean up from the end of the round
-        :return: Maybe the tiles that are to be returned to the tilebag
+        :return: Maybe the tiles that are to be returned to the tile_bag
         """
         pass
 
 
 if __name__ == "__main__":
-    # os.chdir("../")  # this is to get the images to work
-    # print(os.getcwd())
+
     tile_bag = Tilebag()
     tile_bag.make_tiles()
     collection_area = CollectionArea(None)
