@@ -33,7 +33,7 @@ class Tilebag:
             self.tiles.pop(i)
         return drawn_tiles
 
-
-new_tilebag = Tilebag()
-new_tilebag.make_tiles()
-new_tilebag.draw_tiles(4, "tile circle")
+if __name__ == "__main__":
+    new_tilebag = Tilebag()
+    new_tilebag.make_tiles()
+    new_tilebag.draw_tiles(4, "tile circle")

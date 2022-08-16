@@ -5,8 +5,6 @@ from dataclasses.screens.numberplayersscreen import NumberPlayersScreen
 from dataclasses.tilebag import Tilebag
 from dataclasses.screens.Game_center import Game_Center
 from dataclasses.tilecircle import TileCircle
-from dataclasses.screens.Playerboard_screen import Playerboard_screen
-import pygame
 
 white = (255, 255, 255)
 
@@ -15,11 +13,16 @@ class Game:
     """The Game class is here to organize the flow of the game."""
 
     def __init__(self, display, screen_dim):
+        """
+        The init method creates all the variables/methods that are necessary to play a game
+        :param display: A display where the information will be displayed
+        :param screen_dim: A tuple with the width and height of the display
+        """
         self.number_of_players = None
         self.game_stage = GameStage.NUMBER_OF_PLAYERS
         self.display = display
         self.screen_dim = screen_dim
-        self.tilecircles = []
+        self.tile_circles = []
         self.selected_tiles = []
         self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
                         GameStage.PLAYER_NAMES: NameEntry(self),
@@ -30,13 +33,22 @@ class Game:
         self.tile_bag.make_tiles()
         self.center_circle = TileCircle(self.tile_bag, type="blank")
         self.player_name_entry = 0
-        # tile_circle = TileCircle(tile_bag)
-        # tile_circle.draw_tiles_from_bag()
 
     def listen(self):
+        """
+        The listen method handles events.
+        In general the game listen method passes off to the current screen listen method.
+
+        :return: None
+        """
         self.screens[self.game_stage].listen()
 
     def show(self):
+        """
+        The show method draws the screen. In general, it tries to draw based on the screen that is the current screen.
+
+        :return: None
+        """
         self.screens[self.game_stage].show()
 
     def get_number_of_players(self):
@@ -51,13 +63,13 @@ class Game:
     def make_tilebag(self):
         self.tile_bag.make_tiles()
 
-    def make_tilecircles(self):
+    def make_tile_circles(self):
         for x in range(2 * self.number_of_players + 1):
             new_circle = TileCircle(self.tile_bag)
 
             # print("HERE!!!")
-            self.tilecircles.append(new_circle)
-            self.tilecircles[x].draw_tiles_from_bag()
+            self.tile_circles.append(new_circle)
+            self.tile_circles[x].draw_tiles_from_bag()
 
     def show_selected_tiles(self):
         offset_x = -15
