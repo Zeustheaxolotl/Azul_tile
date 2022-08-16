@@ -52,7 +52,7 @@ class TileCircle:
         :return: Tuple with tiles matching the clicked tiles and the rest of the tiles
         """
         if event.type == MOUSEBUTTONDOWN:
-            print(event.pos)
+            # print(event.pos)
             x, y = event.pos
 
             if self.collide_tile_circle(x, y):  # hit the circle
