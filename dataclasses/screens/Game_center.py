@@ -3,6 +3,8 @@ import math
 import pygame
 
 # from dataclasses.game import Game
+#from dataclasses.game import Game
+from dataclasses.gamestage import GameStage
 from dataclasses.screens.screen import Screen, exit_check
 from dataclasses.tilebag import Tilebag
 from dataclasses.tilecircle import TileCircle
@@ -14,6 +16,8 @@ class Game_Center(Screen):
         super().__init__(game)
         self.circles = circles
         self.number_of_players = number_of_players
+        self.button_image = pygame.image.load('img/Azul Button.png')
+
         print('here')
 
     def reset_num_of_players(self, number_of_players):
@@ -28,20 +32,20 @@ class Game_Center(Screen):
             y = 300 + 300 * math.sin((2 * math.pi) / len(self.circles) * i)
             self.circles[i].show(self.display, x, y)
         self.game.center_circle.show(self.display, 500, 300)
-        # show selected tiles
-        self.show_selected_tiles()
+        self.display.blit(self.button_image, (100, 700))
 
-    def show_selected_tiles(self):
-        offset_x = -15
-        offset_y = -15
-        for tile in self.game.selected_tiles:
-            x, y = pygame.mouse.get_pos()
-            tile.show(self.display, x + offset_x, y + offset_y)
-            offset_x += 45
+        # show selected tiles
+        self.game.show_selected_tiles()
+
+
+
 
     def listen(self):
         for event in pygame.event.get():
             exit_check(event)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if 105 <= pygame.mouse.get_pos()[0] <= 165 and 705 <= pygame.mouse.get_pos()[1] <= 750:
+                    self.game.game_stage = GameStage.PLAYERBOARD_SCREEN
 
             for circle in self.circles:
                 tiles = circle.get_clicked_tiles(event)
