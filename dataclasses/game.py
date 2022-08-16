@@ -5,6 +5,8 @@ from dataclasses.screens.numberplayersscreen import NumberPlayersScreen
 from dataclasses.tilebag import Tilebag
 from dataclasses.screens.Game_center import Game_Center
 from dataclasses.tilecircle import TileCircle
+from dataclasses.screens.Playerboard_screen import Playerboard_screen
+import pygame
 
 white = (255, 255, 255)
 
@@ -21,7 +23,8 @@ class Game:
         self.selected_tiles = []
         self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
                         GameStage.PLAYER_NAMES: NameEntry(self),
-                        GameStage.GAME_CENTER: Game_Center(self, self.tilecircles, self.number_of_players)}
+                        GameStage.GAME_CENTER: Game_Center(self, self.tilecircles, self.number_of_players),
+                        GameStage.PLAYERBOARD_SCREEN: Playerboard_screen(self)}
         self.players = []
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
@@ -55,3 +58,11 @@ class Game:
             # print("HERE!!!")
             self.tilecircles.append(new_circle)
             self.tilecircles[x].draw_tiles_from_bag()
+
+    def show_selected_tiles(self):
+        offset_x = -15
+        offset_y = -15
+        for tile in self.selected_tiles:
+            x, y = pygame.mouse.get_pos()
+            tile.show(self.display, x + offset_x, y + offset_y)
+            offset_x += 45
