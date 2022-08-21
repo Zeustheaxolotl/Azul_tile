@@ -1,4 +1,4 @@
-import os
+
 import sys
 import random
 
@@ -54,7 +54,7 @@ class TileCircle:
         if event.type == MOUSEBUTTONDOWN:
             # print(event.pos)
             x, y = event.pos
-
+            # print(str(event.pos))
             if self.collide_tile_circle(x, y):  # hit the circle
                 hit_tile = self.collide_tiles(x, y)  # Was a tile hit?
                 if hit_tile:
@@ -105,34 +105,17 @@ class Test_Tile_Circle_Screen(Screen):
 
     def listen(self):
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
+            exit_check(event)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                tiles = self.tile_circle.get_clicked_tiles(event)
 
-            tiles = self.tile_circle.get_clicked_tiles(event)
-            if tiles:
-                self.tiles += tiles[0]
-                self.center_tiles += tiles[1]
-
-            # if event.type == MOUSEBUTTONDOWN:
-            #     print(event.pos)
-            #     x, y = event.pos
-            #     hit_circle = self.tile_circle.collide_tile_circle(x, y)
-            #     hit_tile = self.tile_circle.collide_tiles(x, y)
-            #     if hit_circle and len(self.tiles) > 0:
-            #         for tile in self.tiles:
-            #             tile.location = "tile circle"
-            #             self.tile_circle.tiles.append(tile)
-            #         self.tiles.clear()
-            #
-            #     if hit_tile and len(self.tiles) == 0:
-            #         print(hit_tile)
-            #         for tile in self.tile_circle.tiles:
-            #             if tile.color == hit_tile.color:
-            #                 tile.location = "chosen"
-            #                 self.tiles.append(tile)
-            #         for tile in self.tiles:
-            #             self.tile_circle.tiles.remove(tile)
+                if tiles:
+                    self.tiles += tiles[0]
+                    self.center_tiles += tiles[1]
+                else:
+                    self.tile_circle.tiles = self.tiles + self.center_tiles
+                    self.center_tiles = []
+                    self.tiles = []
 
 
 if __name__ == "__main__":

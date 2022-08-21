@@ -21,6 +21,7 @@ class Game:
         :param screen_dim: A tuple with the width and height of the display
         """
         self.number_of_players = None
+        self.players = []
         self.game_stage = GameStage.NUMBER_OF_PLAYERS
         self.display = display
         self.screen_dim = screen_dim
@@ -28,9 +29,9 @@ class Game:
         self.selected_tiles = []
         self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
                         GameStage.PLAYER_NAMES: NameEntry(self),
-                        GameStage.GAME_CENTER: Game_Center(self, self.tilecircles, self.number_of_players),
+                        GameStage.GAME_CENTER: Game_Center(self, self.tile_circles, self.number_of_players),
                         GameStage.PLAYERBOARD_SCREEN: Playerboard_screen(self)}
-        self.players = []
+
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
         self.center_circle = TileCircle(self.tile_bag, type="blank")
