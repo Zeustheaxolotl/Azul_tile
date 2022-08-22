@@ -1,3 +1,6 @@
+from dataclasses.collectionarea import CollectionArea
+
+
 class Player:
     """
     A class to hold information about a player.
@@ -13,6 +16,9 @@ class Player:
         self.score = 0
         self.player_color = Player.colors[Player.count % 4]
         Player.count += 1
+        self.collection_area = CollectionArea()
+        # self.overflow=Overflow()
+        # self.tile_wall=TileWall()
 
     def add_next_player(self, player):
         """
@@ -37,11 +43,30 @@ class Player:
         return self.score
 
     def add_to_score(self, amount):
+        """
+        Change the current score of a player
+        :param amount: The amount to increase the score
+        :return: the adjusted the score of player
+        """
         self.score += amount
+        return self.score
+
+    def show(self, display, x, y):
+        """
+        Show the player board setup  with a collection area, the tile wall and the overflow area
+        :param display: The display that the player board is to be shown on
+        :param x: The x coordinate of the upper left-hand corner
+        :param y: The y coordinate of the upper left-hand corner
+        :return: None
+        """
+
+        self.collection_area.show(display, x, y)
+        # self.tile_wall(display, x+300, y)
+        # self.overflow(display, x, y+400)
 
 
 if __name__ == "__main__":
-    x = Player("Bob")
-    y = Player("Shirley")
-    print(str(x.player_color))
-    print(str(y.player_color))
+    play1 = Player("Bob")
+    play2 = Player("Shirley")
+    print(str(play1.player_color))
+    print(str(play2.player_color))

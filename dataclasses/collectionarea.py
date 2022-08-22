@@ -10,12 +10,12 @@ class CollectionArea:
     The collection area is where player place tiles they pick up before the end of round.
     """
 
-    def __init__(self, game):
+    def __init__(self):
         """
         The initialization of the Collection Area
         :param game: reference to the game for communication
         """
-        self.game = game
+        # self.game = game
         self.tile_rows = []
         self.create_tile_rows()
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
     tile_bag = Tilebag()
     tile_bag.make_tiles()
-    collection_area = CollectionArea(None)
+    collection_area = CollectionArea()
     new_tiles = tile_bag.draw_tiles(4, "Collection Area")
     collection_area.tile_rows[2].accept_tiles(new_tiles)
     pygame.init()

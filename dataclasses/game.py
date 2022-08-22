@@ -29,13 +29,14 @@ class Game:
         self.selected_tiles = []
         self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
                         GameStage.PLAYER_NAMES: NameEntry(self),
-                        GameStage.GAME_CENTER: Game_Center(self, self.tile_circles, self.number_of_players),
+                        GameStage.GAME_CENTER: Game_Center(self),
                         GameStage.PLAYERBOARD_SCREEN: Playerboard_screen(self)}
 
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
         self.center_circle = TileCircle(self.tile_bag, type="blank")
         self.player_name_entry = 0
+        self.current_player = None
         # tile_circle = TileCircle(tile_bag)
         # tile_circle.draw_tiles_from_bag()
 
@@ -63,7 +64,9 @@ class Game:
         return self.players
 
     def add_player(self, name):
-        self.players.append(Player(name))
+        player = Player(name)
+        self.players.append(player)
+        return player
 
     def make_tilebag(self):
         self.tile_bag.make_tiles()

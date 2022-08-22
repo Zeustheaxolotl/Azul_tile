@@ -25,13 +25,21 @@ class Tilebag:
     def draw_tiles(self, num, location):
         drawn_tiles = []
         # print('here')
-        for z in range(num):
-            i = random.randint(0, len(self.tiles))
-            self.tiles[i].reset_location(location)
-            drawn_tiles.append(self.tiles[i])
-            # print(self.tiles[i].__str__())
-            self.tiles.pop(i)
-        return drawn_tiles
+        tiles = random.sample(self.tiles, num)
+        for tile in tiles:
+            tile.reset_location(location)
+            self.tiles.remove(tile)
+        return tiles
+
+        # for z in range(num):
+        #
+        #     i = random.randint(0, len(self.tiles))
+        #     print(i)
+        #     self.tiles[i].reset_location(location)
+        #     drawn_tiles.append(self.tiles[i])
+        #     # print(self.tiles[i].__str__())
+        #     self.tiles.pop(i)
+        # return drawn_tiles
 
 if __name__ == "__main__":
     new_tilebag = Tilebag()

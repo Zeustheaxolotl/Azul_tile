@@ -63,15 +63,16 @@ class NameEntry(Screen):
 
                 if event.key == pygame.K_RETURN:
                     # Create Player
-                    self.game.add_player(self.user_text)
-
+                    player = self.game.add_player(self.user_text)
+                    if self.game.player_name_entry == 0:
+                        self.game.current_player = player
                     # Increase the player indicator
                     self.game.player_name_entry += 1
                     # clear user_text
                     self.user_text = ''
                     # check if we need to move on to the next stage.
                     if self.game.player_name_entry == self.game.get_number_of_players():
-                        print("All players")
+                        # print("All players")
                         for i in range(self.game.get_number_of_players(), 1, -1):
                             self.game.get_players()[i - 2].add_next_player(self.game.get_players()[i - 1])
                         self.game.game_stage = GameStage.GAME_CENTER

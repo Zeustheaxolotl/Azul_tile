@@ -13,10 +13,11 @@ from dataclasses.scoretracker import ScoreTracker
 
 class Game_Center(Screen):
 
-    def __init__(self, game, circles, number_of_players):
+    def __init__(self, game):
         super().__init__(game)
-        self.circles = circles
-        self.number_of_players = number_of_players
+        # self.circles = circles
+        # self.number_of_players = number_of_players
+        self.game = game
         self.button_image = pygame.image.load('img/Azul Button.png')
         self.score_tracker = ScoreTracker(self.game.players, self.game.screen_dim)
 
@@ -30,10 +31,10 @@ class Game_Center(Screen):
         self.display.fill((0, 0, 0))
         self.score_tracker.show(self.display)
         # print(self.players)
-        for i in range(len(self.circles)):
-            x = 500 + 320 * math.cos((2 * math.pi) / len(self.circles) * i)
-            y = 300 + 270 * math.sin((2 * math.pi) / len(self.circles) * i)
-            self.circles[i].show(self.display, x, y)
+        for i in range(len(self.game.tile_circles)):
+            x = 500 + 320 * math.cos((2 * math.pi) / len(self.game.tile_circles) * i)
+            y = 300 + 270 * math.sin((2 * math.pi) / len(self.game.tile_circles) * i)
+            self.game.tile_circles[i].show(self.display, x, y)
         self.game.center_circle.show(self.display, 500, 300)
         self.game_center_button_rect = self.display.blit(self.button_image, (100, 700))
 
@@ -48,7 +49,7 @@ class Game_Center(Screen):
                     self.game.game_stage = GameStage.PLAYERBOARD_SCREEN
                     return None
 
-                for circle in self.circles:
+                for circle in self.game.tile_circles:
                     tiles = circle.get_clicked_tiles(event)
                     if tiles and len(self.game.selected_tiles) == 0:
                         self.game.selected_tiles += tiles[0]
