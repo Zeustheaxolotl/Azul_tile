@@ -59,20 +59,44 @@ class Game:
         self.screens[self.game_stage].show()
 
     def get_number_of_players(self):
+        """
+        How many players are in this game
+        :return: an integer indicating the number of players
+        """
         return self.number_of_players
 
     def get_players(self):
+        """
+        Returns a list of players
+        :return: A list of player objects
+        """
         return self.players
 
     def add_player(self, name):
+        """
+        Add a player to the game
+        :param name: A string indicating the number of players
+        :return: a player object
+        """
         player = Player(name)
         self.players.append(player)
+        # self.number_of_players=len(self.players)
         return player
 
     def make_tilebag(self):
+        """
+        Initialize the tile bag
+        :return: None
+        """
         self.tile_bag.make_tiles()
 
     def make_tile_circles(self):
+        """
+        Create the right number of tile circles based on the number of players. Those tile circles will have
+        tiles on them.
+
+        :return: None
+        """
         for x in range(2 * self.number_of_players + 1):
             new_circle = TileCircle(self.tile_bag)
 
@@ -81,6 +105,10 @@ class Game:
             self.tile_circles[x].draw_tiles_from_bag()
 
     def show_selected_tiles(self):
+        """
+        Have tiles connected to the mouse cursor shown on the screen.
+        :return: None
+        """
         offset_x = -15
         offset_y = -15
         for tile in self.selected_tiles:
@@ -89,6 +117,10 @@ class Game:
             offset_x += 45
 
     def current_color(self):
+        """
+        Determine the color for the background screen based on the player
+        :return: a tuple of numbers for
+        """
         if self.current_player:
             return (self.current_player.player_color[0] / 5,
                     self.current_player.player_color[1] / 5,
