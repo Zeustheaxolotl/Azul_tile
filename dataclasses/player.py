@@ -64,6 +64,12 @@ class Player:
         # self.tile_wall(display, x+300, y)
         # self.overflow(display, x, y+400)
 
+    def listen(self, event):
+        # listen for the collection area
+        row = self.collection_area.listen(event)
+        if row:
+            return ("row", row)
+        return ("none", None)
 
 if __name__ == "__main__":
     play1 = Player("Bob")

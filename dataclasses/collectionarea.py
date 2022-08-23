@@ -13,7 +13,6 @@ class CollectionArea:
     def __init__(self):
         """
         The initialization of the Collection Area
-        :param game: reference to the game for communication
         """
         # self.game = game
         self.tile_rows = []
@@ -47,7 +46,14 @@ class CollectionArea:
         :param event: a pygame event
         :return:
         """
-        pass
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = pygame.mouse.get_pos()
+            for tile_row in self.tile_rows:
+                if tile_row.collide_tile_row(x, y):
+                    return tile_row
+                    # if not tile_row.is_full():
+                    #    tile_row.accept_tiles(self.game.selected_tiles)
+        return None
 
     def end_of_round(self):
         """

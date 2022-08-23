@@ -1,6 +1,6 @@
 from dataclasses.gamestage import GameStage
 from dataclasses.player import Player
-from dataclasses.screens.Game_center import Game_Center
+from dataclasses.screens.gamecenter import GameCenter
 from dataclasses.screens.nameentry import NameEntry
 from dataclasses.screens.numberplayersscreen import NumberPlayersScreen
 from dataclasses.tilebag import Tilebag
@@ -21,6 +21,7 @@ class Game:
         :param screen_dim: A tuple with the width and height of the display
         """
         self.number_of_players = None
+        self.current_player = None
         self.players = []
         self.game_stage = GameStage.NUMBER_OF_PLAYERS
         self.display = display
@@ -29,14 +30,14 @@ class Game:
         self.selected_tiles = []
         self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
                         GameStage.PLAYER_NAMES: NameEntry(self),
-                        GameStage.GAME_CENTER: Game_Center(self),
+                        GameStage.GAME_CENTER: GameCenter(self),
                         GameStage.PLAYERBOARD_SCREEN: Playerboard_screen(self)}
 
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
         self.center_circle = TileCircle(self.tile_bag, type="blank")
         self.player_name_entry = 0
-        self.current_player = None
+
         # tile_circle = TileCircle(tile_bag)
         # tile_circle.draw_tiles_from_bag()
 
@@ -86,3 +87,10 @@ class Game:
             x, y = pygame.mouse.get_pos()
             tile.show(self.display, x + offset_x, y + offset_y)
             offset_x += 45
+
+    def current_color(self):
+        if self.current_player:
+            return (self.current_player.player_color[0] / 5,
+                    self.current_player.player_color[1] / 5,
+                    self.current_player.player_color[2] / 5)
+        return (0, 0, 0)
