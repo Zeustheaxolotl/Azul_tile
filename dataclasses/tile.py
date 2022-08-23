@@ -56,7 +56,7 @@ if __name__ == "__main__":
     # tile_bag.make_tiles()
     os.chdir("../")  # find the images
     print(os.getcwd())
-    tile = Tile("nowhere", "blue", "img/Blue_Tile.png")
+    tile = Tile("nowhere", "blue", "img/Blue_Tile.png", 12)
     # tile_circle = TileCircle(tile_bag)
     # tile_circle.draw_tiles_from_bag()
 
