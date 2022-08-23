@@ -54,22 +54,27 @@ class GameCenter(Screen):
                     self.game.game_stage = GameStage.PLAYERBOARD_SCREEN
                     return None
 
-                for circle in self.game.tile_circles:
-                    tiles = circle.get_clicked_tiles(event)
-                    if tiles and len(self.game.selected_tiles) == 0:
-                        self.game.selected_tiles += tiles[0]
-                        self.game.center_circle.tiles += tiles[1]
-                        self.game.last_tiles_rejected = tiles[1]
-                        self.game.last_circle_tapped = circle
-                    else:
-                        if len(self.game.selected_tiles) > 0:
-                            if circle == self.game.last_circle_tapped:
-                                # check that this is the circle that was selected last?
-                                circle.tiles = self.game.selected_tiles + self.game.last_tiles_rejected
-                                self.game.selected_tiles = []
-                                for tile in self.game.last_tiles_rejected:
-                                    self.game.center_circle.tiles.remove(tile)
-                                self.game.last_tiles_rejected = []
+                center_tiles = self.game.center_circle.get_clicked_tiles(event)
+                if center_tiles:
+                    self.game.selected_tiles = center_tiles[0]
+                else:
+                    # check the circles
+                    for circle in self.game.tile_circles:
+                        tiles = circle.get_clicked_tiles(event)
+                        if tiles and len(self.game.selected_tiles) == 0:
+                            self.game.selected_tiles += tiles[0]
+                            self.game.center_circle.tiles += tiles[1]
+                            self.game.last_tiles_rejected = tiles[1]
+                            self.game.last_circle_tapped = circle
+                        else:
+                            if len(self.game.selected_tiles) > 0:
+                                if circle == self.game.last_circle_tapped:
+                                    # check that this is the circle that was selected last?
+                                    circle.tiles = self.game.selected_tiles + self.game.last_tiles_rejected
+                                    self.game.selected_tiles = []
+                                    for tile in self.game.last_tiles_rejected:
+                                        self.game.center_circle.tiles.remove(tile)
+                                    self.game.last_tiles_rejected = []
 
 
 if __name__ == "__main__":

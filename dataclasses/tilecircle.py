@@ -21,6 +21,7 @@ class TileCircle:
         if self.type == "blank":
             self.positions += [(0, 0), (40, 0), (120, 0), (160, 0), (0, 40), (160, 40), (0, 120), (160, 120),
                                (0, 160), (40, 160), (120, 160), (160, 160)]
+            self.rect = pygame.Rect(500, 300, 200, 200)
 
     def draw_tiles_from_bag(self, num=4):
         self.tiles = self.tile_bag.draw_tiles(num, "tile_circle")
@@ -61,13 +62,20 @@ class TileCircle:
                     matching_tiles = []
                     unmatching_tiles = []
                     for tile in self.tiles:
-                        self.positions.append(tile.offset)
-                        tile.set_offset(None)
+
                         if tile.color == hit_tile.color:
                             matching_tiles.append(tile)
-                        else:
+                            self.positions.append(tile.offset)
+                            tile.set_offset(None)
+                        elif self.type != "blank":
                             unmatching_tiles.append(tile)
-                    self.tiles = []
+                            self.positions.append(tile.offset)
+                            tile.set_offset(None)
+                    if self.type == "blank":
+                        for tile in matching_tiles:
+                            self.tiles.remove(tile)
+                    else:
+                        self.tiles = []
                     return (matching_tiles, unmatching_tiles)
         return None
 
