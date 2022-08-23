@@ -36,6 +36,7 @@ class Game:
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
         self.center_circle = TileCircle(self.tile_bag, type="blank")
+
         self.player_name_entry = 0
 
         # tile_circle = TileCircle(tile_bag)
@@ -79,6 +80,7 @@ class Game:
             # print("HERE!!!")
             self.tile_circles.append(new_circle)
             self.tile_circles[x].draw_tiles_from_bag()
+            #self.tile_circles
 
     def show_selected_tiles(self):
         offset_x = -15

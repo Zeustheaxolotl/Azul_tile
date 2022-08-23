@@ -20,6 +20,9 @@ class Tilebag:
             for y in range(20):
                 new_tile = Tile('tile bag', self.colors[x], self.images[x], y)
                 self.tiles.append(new_tile)
+        first_tile = Tile('tile bag', 'first', 'img/First_Tile.png', 0)
+        self.tiles.append(first_tile)
+        print('make tiles')
                 # print(new_tile.__str__())
 
     def draw_tiles(self, num, location):
@@ -30,6 +33,10 @@ class Tilebag:
             tile.reset_location(location)
             self.tiles.remove(tile)
         return tiles
+
+    def get_first_tile(self, location):
+        first_tile = Tile(location, 'first', 'img/First_Tile.png', 0)
+        return first_tile
 
         # for z in range(num):
         #
