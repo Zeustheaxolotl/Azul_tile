@@ -1,10 +1,12 @@
 from dataclasses.gamestage import GameStage
 from dataclasses.player import Player
+from dataclasses.screens.gamecenter import GameCenter
 from dataclasses.screens.nameentry import NameEntry
 from dataclasses.screens.numberplayersscreen import NumberPlayersScreen
 from dataclasses.tilebag import Tilebag
-from dataclasses.screens.Game_center import Game_Center
 from dataclasses.tilecircle import TileCircle
+from dataclasses.screens.Playerboard_screen import Playerboard_screen
+import pygame
 
 white = (255, 255, 255)
 
@@ -19,6 +21,8 @@ class Game:
         :param screen_dim: A tuple with the width and height of the display
         """
         self.number_of_players = None
+        self.current_player = None
+        self.players = []
         self.game_stage = GameStage.NUMBER_OF_PLAYERS
         self.display = display
         self.screen_dim = screen_dim
@@ -26,9 +30,9 @@ class Game:
         self.selected_tiles = []
         self.screens = {GameStage.NUMBER_OF_PLAYERS: NumberPlayersScreen(self),
                         GameStage.PLAYER_NAMES: NameEntry(self),
-                        GameStage.GAME_CENTER: Game_Center(self, self.tilecircles, self.number_of_players),
+                        GameStage.GAME_CENTER: GameCenter(self),
                         GameStage.PLAYERBOARD_SCREEN: Playerboard_screen(self)}
-        self.players = []
+
         self.tile_bag = Tilebag()
         self.tile_bag.make_tiles()
         self.center_circle = TileCircle(self.tile_bag, type="blank")
@@ -58,7 +62,9 @@ class Game:
         return self.players
 
     def add_player(self, name):
-        self.players.append(Player(name))
+        player = Player(name)
+        self.players.append(player)
+        return player
 
     def make_tilebag(self):
         self.tile_bag.make_tiles()
@@ -78,3 +84,10 @@ class Game:
             x, y = pygame.mouse.get_pos()
             tile.show(self.display, x + offset_x, y + offset_y)
             offset_x += 45
+
+    def current_color(self):
+        if self.current_player:
+            return (self.current_player.player_color[0] / 5,
+                    self.current_player.player_color[1] / 5,
+                    self.current_player.player_color[2] / 5)
+        return (0, 0, 0)
