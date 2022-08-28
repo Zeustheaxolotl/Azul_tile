@@ -72,6 +72,10 @@ class Player:
             return ("row", row)
         return ("none", None)
 
+    def place_overflow(self, tiles):
+        if tiles != None:
+            self.overflow.placeTile(tiles)
+
 if __name__ == "__main__":
     play1 = Player("Bob")
     play2 = Player("Shirley")

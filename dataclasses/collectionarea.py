@@ -24,7 +24,7 @@ class CollectionArea:
         :return: None
         """
         for i in range(5):
-            tile_row = TileRow(i + 1)
+            tile_row = TileRow(i + 1, "collect")
             self.tile_rows.append(tile_row)
 
     def show(self, screen, x, y):
@@ -51,8 +51,9 @@ class CollectionArea:
             for tile_row in self.tile_rows:
                 if tile_row.collide_tile_row(x, y):
                     return tile_row
-                    # if not tile_row.is_full():
-                    #    tile_row.accept_tiles(self.game.selected_tiles)
+                #if tile_row.is_full():
+
+                    #  tile_row.accept_tiles(self.game.selected_tiles)
         return None
 
     def end_of_round(self):

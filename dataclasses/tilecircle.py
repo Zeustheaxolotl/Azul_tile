@@ -22,7 +22,7 @@ class TileCircle:
             self.positions += [(0, 0), (40, 0), (120, 0), (160, 0), (0, 40), (160, 40), (0, 120), (160, 120),
                                (0, 160), (40, 160), (120, 160), (160, 160)]
             self.rect = pygame.Rect(500, 300, 200, 200)
-            print('get first tile')
+            #print('get first tile')
             self.first_tile = self.tile_bag.get_first_tile('center')
             self.tiles.append(self.first_tile)
 
@@ -79,9 +79,11 @@ class TileCircle:
                             if tile.color == 'first':
                                 matching_tiles.append(tile)
                                 self.positions.append(tile.offset)
+
                                 tile.set_offset(None)
 
                     if self.type == "blank":
+                        #print(matching_tiles[0])
                         for tile in matching_tiles:
                             self.tiles.remove(tile)
                     else:

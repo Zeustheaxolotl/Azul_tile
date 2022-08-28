@@ -3,6 +3,7 @@ import pygame
 from dataclasses.gamestage import GameStage
 from dataclasses.screens.screen import Screen, exit_check
 from dataclasses.namescorelabel import NameScoreLabel
+from dataclasses.overflow import Overflow
 #import math
 #from dataclasses.tilecircle import TileCircle
 #from dataclasses.tilebag import Tilebag
@@ -48,9 +49,10 @@ class Playerboard_screen(Screen):
                     if not obj.is_full():
                         try:
                             overflow = obj.accept_tiles(self.game.selected_tiles)
+                            self.game.current_player.place_overflow(overflow)
                             # TODO place overflow in the overflow area
                             self.game.selected_tiles = []
-                            print(self.game.current_player.get_next_player().name)
+                            #print(self.game.current_player.get_next_player().name)
                             self.game.current_player = self.game.current_player.get_next_player()
                             self.game.game_stage = GameStage.GAME_CENTER
                         except ValueError:

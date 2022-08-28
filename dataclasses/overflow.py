@@ -1,17 +1,17 @@
 import pygame
 from dataclasses.tilerow import TileRow
+
+
 class Overflow:
     def __init__(self):
         self.tilenum = 0
         self.tiles = []
         self.score = 0
         self.oldtiles = []
-        self.tilerow = TileRow(7)
-
+        self.tilerow = TileRow(7, "overflow")
 
     def placeTile(self, tiles):
-        for x in range(len(tiles)):
-            self.tiles.append(tiles[x])
+        self.tilerow.accept_tiles(tiles)
         self.tilenum += len(tiles)
         print(self.tilenum)
         print(self.tiles)
