@@ -91,6 +91,8 @@ class TileCircle:
                     return (matching_tiles, unmatching_tiles)
         return None
 
+    def is_empty(self):
+        return len(self.tiles) == 0
 
 class Test_Tile_Circle_Screen(Screen):
 
