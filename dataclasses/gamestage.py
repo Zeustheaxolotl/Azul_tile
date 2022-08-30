@@ -9,3 +9,4 @@ class GameStage(Enum):
     PLAYER_NAMES = 2
     GAME_CENTER = 3
     PLAYERBOARD_SCREEN = 4
+    FINAL_SCREEN = 5

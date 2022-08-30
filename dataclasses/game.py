@@ -126,3 +126,56 @@ class Game:
                     self.current_player.player_color[1] / 5,
                     self.current_player.player_color[2] / 5)
         return (0, 0, 0)
+
+    def end_of_round(self):
+        """
+        This method is to do the various things that need to be done at the end of the round.
+        For each player:
+            * The tiles need to be moved to the tile wall
+            * Released tiles need to be return to the tile_bag
+            * release tiles from the overflow
+            * Score calculation needs to be made
+            * determination if the game is over
+            * repopulate the tile circles
+
+
+        :return:
+        """
+        # tiles need to be moved to the tile wall
+        end_game = False
+        for player in self.players:
+            c_a = player.collection_area
+            for i in range(len(c_a.tile_rows)):
+                if c_a.tile_rows[i].is_full():
+                    tiles = c_a.tile_rows[i].flush_tiles()
+                    player.tile_wall.add_tile(i, tiles[0])
+                    del tiles[0]
+                    self.tile_bag.tiles.append(tiles)
+            overflow = player.overflow
+            tiles = overflow.release_tiles()  # this should give back all the tiles that are not the 1st player tile.
+            self.tile_bag.tiles.append(tiles)
+            player.add_to_score(player.tilewall.round_score())
+            end_game = end_game or player.tilewall.is_game_over()
+        if end_game:
+            # the game is over. Final calculations
+            self.game.end_game()
+
+        else:
+            # time to repopulate the tile
+            for circle in self.tile_circles:
+                circle.draw_tiles_from_bag()
+            # add the 1st player to the center circle
+
+    def end_game(self):
+        self.game_stage = GameStage.FINAL_SCREEN
+        for player in self.players:
+            final_bonus = player.tilewall.calculate_final_bonus()
+            player.add_to_score(final_bonus)
+
+    def is_end_of_round(self):
+        for circle in self.tile_circles:
+            if not circle.is_empty():
+                return False
+        if not self.center_circle.is_empty():
+            return False
+        return True
