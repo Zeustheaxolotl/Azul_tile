@@ -4,7 +4,6 @@ import random
 
 import pygame
 from pygame.locals import *
-
 from dataclasses.tilebag import Tilebag
 from dataclasses.screens.screen import Screen, exit_check
 
@@ -16,12 +15,16 @@ class TileCircle:
         self.image = pygame.image.load('img/tile_circle_200x200.png')
         self.rect = None
         self.type = type
+        self.first = True
         self.positions = [(80, 0), (40, 40), (80, 40), (120, 40), (0, 80), (40, 80), (80, 80), (120, 80), (160, 80),
                           (40, 120), (80, 120), (120, 120), (80, 160)]
         if self.type == "blank":
             self.positions += [(0, 0), (40, 0), (120, 0), (160, 0), (0, 40), (160, 40), (0, 120), (160, 120),
                                (0, 160), (40, 160), (120, 160), (160, 160)]
             self.rect = pygame.Rect(500, 300, 200, 200)
+            #print('get first tile')
+            self.first_tile = self.tile_bag.get_first_tile('center')
+            self.tiles.append(self.first_tile)
 
     def draw_tiles_from_bag(self, num=4):
         self.tiles = self.tile_bag.draw_tiles(num, "tile_circle")
@@ -57,12 +60,13 @@ class TileCircle:
             x, y = event.pos
             # print(str(event.pos))
             if self.collide_tile_circle(x, y):  # hit the circle
-                hit_tile = self.collide_tiles(x, y)  # Was a tile hit?
+                hit_tile = self.collide_tiles(x, y)# Was a tile hit?
+
                 if hit_tile:
                     matching_tiles = []
                     unmatching_tiles = []
                     for tile in self.tiles:
-
+                        print(tile.color)
                         if tile.color == hit_tile.color:
                             matching_tiles.append(tile)
                             self.positions.append(tile.offset)
@@ -71,7 +75,15 @@ class TileCircle:
                             unmatching_tiles.append(tile)
                             self.positions.append(tile.offset)
                             tile.set_offset(None)
+                        elif self.type == "blank":
+                            if tile.color == 'first':
+                                matching_tiles.append(tile)
+                                self.positions.append(tile.offset)
+
+                                tile.set_offset(None)
+
                     if self.type == "blank":
+                        #print(matching_tiles[0])
                         for tile in matching_tiles:
                             self.tiles.remove(tile)
                     else:
@@ -79,6 +91,8 @@ class TileCircle:
                     return (matching_tiles, unmatching_tiles)
         return None
 
+    def is_empty(self):
+        return len(self.tiles) == 0
 
 class Test_Tile_Circle_Screen(Screen):
 
