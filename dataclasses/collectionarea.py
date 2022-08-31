@@ -1,5 +1,6 @@
 import pygame
 
+
 from dataclasses.tilebag import Tilebag
 from dataclasses.tilerow import TileRow
 from dataclasses.screens.screen import exit_check
@@ -27,7 +28,7 @@ class CollectionArea:
             tile_row = TileRow(i + 1, "collect")
             self.tile_rows.append(tile_row)
 
-    def show(self, screen, x, y):
+    def show(self, screen, x: int, y: int):
         """
         Draw the Collection Area. Do this by drawing individual tile rows
         :param screen: A place to display the information
@@ -40,7 +41,7 @@ class CollectionArea:
             tile_row.show(screen, x + 2, y + offset_y)
             offset_y += 36
 
-    def listen(self, event):
+    def listen(self, event: pygame.event):
         """
         Handle events and see if there was a click in the collection area
         :param event: a pygame event
