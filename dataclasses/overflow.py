@@ -5,7 +5,7 @@ from dataclasses.tilerow import TileRow
 class Overflow:
     def __init__(self):
         self.tilenum = 0
-        self.tiles = []
+        # self.tiles = []
         self.score = 0
         self.oldtiles = []
         self.tilerow = TileRow(7, "overflow")
@@ -14,15 +14,14 @@ class Overflow:
         self.tilerow.accept_tiles(tiles)
         self.tilenum += len(tiles)
         print(self.tilenum)
-        print(self.tiles)
 
-    def removeTile(self):
+    '''def removeTile(self):
         self.tilenum = 0
         print(self.tilenum)
         self.tiles = []
         print(self.tiles)
         self.oldtiles = self.tiles
-        return self.oldtiles
+        return self.oldtiles '''
 
     def calc_score(self):
         if self.tilenum < 3:
