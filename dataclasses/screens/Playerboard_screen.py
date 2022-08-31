@@ -1,14 +1,13 @@
 import pygame
 
 from dataclasses.gamestage import GameStage
+from dataclasses.screens.screen import Screen, exit_check
 from dataclasses.namescorelabel import NameScoreLabel
 from dataclasses.overflow import Overflow
 #import math
 #from dataclasses.tilecircle import TileCircle
 #from dataclasses.tilebag import Tilebag
 #from main import game
-from dataclasses.screens.screen import Screen, exit_check
-
 
 
 class Playerboard_screen(Screen):
