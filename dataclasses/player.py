@@ -1,6 +1,6 @@
 from dataclasses.collectionarea import CollectionArea
 from dataclasses.overflow import Overflow
-
+from dataclasses.tilewall import Tile_Wall
 class Player:
     """
     A class to hold information about a player.
@@ -18,6 +18,7 @@ class Player:
         Player.count += 1
         self.collection_area = CollectionArea()
         self.overflow = Overflow()
+        self.tilewall = Tile_Wall()
         # self.tile_wall=TileWall()
 
     def add_next_player(self, player):
@@ -62,8 +63,7 @@ class Player:
 
         self.collection_area.show(display, x, y)
         self.overflow.show(display, x, y+200)
-        # self.tile_wall(display, x+300, y)
-        # self.overflow(display, x, y+400)
+        self.tilewall.show(display, x+200, y)
 
     def listen(self, event):
         # listen for the collection area
