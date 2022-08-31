@@ -14,6 +14,10 @@ class NameEntry(Screen):
         self.user_text = ''
 
     def show(self):
+        """
+        Show this screen.
+        :return: None
+        """
         # basic font for user typed
         base_font = pygame.font.Font(None, 32)
 
@@ -46,6 +50,10 @@ class NameEntry(Screen):
         self.input_rect.w = max(100, text_surface.get_width() + 10)
 
     def listen(self):
+        """
+        Listen for events from pygame.
+        :return: None
+        """
         # TODO: Make the backspace work on nameentry.
         for event in pygame.event.get():
 

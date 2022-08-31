@@ -11,6 +11,7 @@ class TileColor(Enum):
     BLUE = 3
     TEAL = 4
     YELLOW = 5
+    FIRST = 6
 
 
 class Tile:
@@ -48,7 +49,8 @@ class Tile:
         return self.rect
 
     def collide_tile(self, x, y):
-        return self.rect.collidepoint(x, y)
+        if self.color != 'first':
+            return self.rect.collidepoint(x, y)
 
 
 if __name__ == "__main__":

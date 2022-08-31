@@ -3,7 +3,7 @@ import pygame
 
 class TileRow:
 
-    def __init__(self, number_of_squares: int):
+    def __init__(self, number_of_squares: int, type):
         """
         Initializer of the tile row
         :param number_of_squares: An integer representing the number of squares in the row
@@ -12,6 +12,7 @@ class TileRow:
         self.tile_color = None
         self.number_of_squares = number_of_squares
         self.rect = None
+        self.type = type
 
     def show(self, screen, x, y):
         """
@@ -36,18 +37,34 @@ class TileRow:
         :param tiles: A list of tiles that need to go to the row
         :return: tiles that don't fit on the row.
         """
-        if self.tile_color:
-            if self.tile_color != tiles[0].color:
-                raise ValueError("Wrong color.")
+        overflow_tiles = []
+        print(self.type)
+        if self.type == "collect":
+            print("HERE")
+            if self.tile_color:
+                print("here???")
+                if self.tile_color != tiles[0].color and tiles[0].color != "first":
+                    raise ValueError("Wrong color.")
+            else:
+                print("is it first" + tiles[0].color)
+                if tiles[0].color == "first":
+                    overflow_tiles = [tiles[0]]
+                    del tiles[0]
+                    print(tiles[0].color)
+                self.tile_color = tiles[0].color
+            squares_remaining = self.number_of_squares - len(self.tiles)
+            # TODO: Look out for 1st player tile.
+            if len(tiles) < squares_remaining:
+                self.tiles += tiles
+            else:
+                self.tiles += tiles[:squares_remaining]
+                for tile in tiles[squares_remaining:]:
+                    overflow_tiles.append(tile)
+            return overflow_tiles
         else:
-            self.tile_color = tiles[0].color
-        squares_remaining = self.number_of_squares - len(self.tiles)
-        # TODO: Look out for 1st player tile.
-        if len(tiles) < squares_remaining:
-            self.tiles += tiles
-        else:
-            self.tiles += tiles[:squares_remaining]
-        return tiles[squares_remaining:]
+            squares_remaining = self.number_of_squares - len(self.tiles)
+            if len(tiles) < squares_remaining:
+                self.tiles +=tiles
 
     def flush_tiles(self):
         """
