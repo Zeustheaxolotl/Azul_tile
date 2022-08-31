@@ -11,7 +11,7 @@ game = Game(display, screen_dim)
 while True:  # main game loop
     display.fill((0, 0, 0))
     game.listen()
-    # tile_circle.draw_tiles_from_bag(4)
+    # tile_circle.draw_tiles_fro m_bag(4)
     # tile_circle.show(display, 100, 50)
     game.show()
     pygame.display.update()
