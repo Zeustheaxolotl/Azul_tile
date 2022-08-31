@@ -1,5 +1,5 @@
 from dataclasses.collectionarea import CollectionArea
-
+from dataclasses.overflow import Overflow
 
 class Player:
     """
@@ -17,7 +17,7 @@ class Player:
         self.player_color = Player.colors[Player.count % 4]
         Player.count += 1
         self.collection_area = CollectionArea()
-        # self.overflow=Overflow()
+        self.overflow = Overflow()
         # self.tile_wall=TileWall()
 
     def add_next_player(self, player):
@@ -61,6 +61,7 @@ class Player:
         """
 
         self.collection_area.show(display, x, y)
+        self.overflow.show(display, x, y+200)
         # self.tile_wall(display, x+300, y)
         # self.overflow(display, x, y+400)
 
@@ -70,6 +71,10 @@ class Player:
         if row:
             return ("row", row)
         return ("none", None)
+
+    def place_overflow(self, tiles):
+        if tiles != None:
+            self.overflow.placeTile(tiles)
 
 if __name__ == "__main__":
     play1 = Player("Bob")
