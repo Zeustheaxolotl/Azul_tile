@@ -48,12 +48,17 @@ class Playerboard_screen(Screen):
                 if type == "row":
                     if not obj.is_full():
                         try:
+
                             overflow = obj.accept_tiles(self.game.selected_tiles)
                             self.game.current_player.place_overflow(overflow)
                             # TODO place overflow in the overflow area
                             self.game.selected_tiles = []
                             #print(self.game.current_player.get_next_player().name)
-                            self.game.current_player = self.game.current_player.get_next_player()
-                            self.game.game_stage = GameStage.GAME_CENTER
+                            if self.game.is_end_of_round():
+                                self.game.end_of_round()
+                            else:
+                                self.game.current_player = self.game.current_player.get_next_player()
+                                self.game.game_stage = GameStage.GAME_CENTER
+
                         except ValueError:
                             print("wrong color")
