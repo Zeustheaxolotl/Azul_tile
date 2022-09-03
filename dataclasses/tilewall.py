@@ -15,14 +15,22 @@ class Tile_Wall():
         self.colors = ['blue', 'yellow', 'red', 'black', 'teal']
         self.images = ['img/Blue_Tile.png', 'img/Yellow_Tile.png', 'img/Red_Tile.png', 'img/Black_Tile.png', 'img/Teal_Tile.png']
         self.create_tilerows()
+        self.column_1 = 0
+        self.column_2 = 0
+        self.column_3 = 0
+        self.column_4 = 0
+        self.column_5 = 0
+        self.columns = [self.column_1, self.column_2, self.column_3, self.column_4, self.column_5]
+        self.score=0
 
     def create_tilerows(self):
         for i in range(5):
             tile_row = TileRow(5, "display")
             self.rows.append(tile_row)
-        for i in range(4):
-            new_tile = Tile('tile wall', self.colors[i], self.images[i], 101)
-            self.rows[0].display_tiles(new_tile, 0)
+        #for i in range(4):
+            #new_tile = Tile('tile wall', self.colors[i], self.images[i], 101)
+            #self.rows[4-i].display_tiles(new_tile, 4-i)
+           # self.rows[0].display_tiles(new_tile, 0)
 
     def show(self, screen, x, y):
         self.rect = screen.blit(self.image, (x, y))
@@ -45,11 +53,33 @@ class Tile_Wall():
                 if tile:
                     x+=1
             if x == 5:
-                print("game_is_over")
+                #print(self.score)
                 return True
             else:
-                print("game continues")
+                #print(self.score)
                 return False
 
     def calculate_final_bonus(self):
-        pass
+        for row in self.rows:
+            x = 0
+            tiles = row.return_tiles()
+            for tile in tiles:
+                if tile:
+                    x += 1
+            if x == 5:
+                self.score+=2
+            for i in range(len(tiles)):
+                if tiles[i]:
+                    self.columns[i] += 1
+        for column in self.columns:
+            if column == 5:
+                self.score += 10
+        print('what is the score???? '+str(self.score))
+        return self.score
+
+
+
+
+
+
+

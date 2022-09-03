@@ -170,10 +170,12 @@ class Game:
             # add the 1st player to the center circle
 
     def end_game(self):
-        self.game_stage = GameStage.FINAL_SCREEN
+        #self.game_stage = GameStage.FINAL_SCREEN
         for player in self.players:
-            pass #final_bonus = player.tilewall.calculate_final_bonus()
-            #player.add_to_score(final_bonus)
+            final_bonus = player.tilewall.calculate_final_bonus()
+            print(final_bonus)
+            player.add_to_score(final_bonus)
+
 
 
     def is_end_of_round(self):
