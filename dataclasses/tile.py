@@ -51,7 +51,8 @@ class Tile:
     def collide_tile(self, x, y):
         if self.color != 'first':
             return self.rect.collidepoint(x, y)
-
+    def testing(self):
+        print("AHHHHHHHHAHAHAHHAHAHHA")
 
 if __name__ == "__main__":
     # tile_bag = Tilebag()

@@ -157,22 +157,24 @@ class Game:
             tiles = overflow.tilerow.flush_tiles()  # this should give back all the tiles that are not the 1st player tile.
             self.tile_bag.tiles.append(tiles)
            # player.add_to_score(player.tilewall.round_score())
-           # end_game = end_game or player.tilewall.is_game_over()
+            end_game = end_game or player.tilewall.is_game_over()
         if end_game:
             # the game is over. Final calculations
-            self.game.end_game()
+            self.end_game()
 
         else:
             # time to repopulate the tile
             for circle in self.tile_circles:
-                circle.draw_tiles_from_bag()
+                pass
+                #circle.draw_tiles_from_bag()
             # add the 1st player to the center circle
 
     def end_game(self):
         self.game_stage = GameStage.FINAL_SCREEN
         for player in self.players:
-            #final_bonus = player.tilewall.calculate_final_bonus()
-            player.add_to_score(final_bonus)
+            pass #final_bonus = player.tilewall.calculate_final_bonus()
+            #player.add_to_score(final_bonus)
+
 
     def is_end_of_round(self):
         for circle in self.tile_circles:

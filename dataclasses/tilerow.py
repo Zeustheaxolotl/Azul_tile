@@ -115,3 +115,6 @@ class TileRow:
         :return:
         """
         return self.rect.collidepoint(x, y)
+
+    def return_tiles(self):
+        return self.tiles

@@ -29,9 +29,10 @@ class Tilebag:
         drawn_tiles = []
         # print('here')
         tiles = random.sample(self.tiles, num)
-        for tile in tiles:
-            tile.reset_location(location)
-            self.tiles.remove(tile)
+        for x in range(len(tiles)):
+            #print(tiles)
+            tiles[x].testing()
+            self.tiles.remove(tiles[x])
         return tiles
 
     def get_first_tile(self, location):
