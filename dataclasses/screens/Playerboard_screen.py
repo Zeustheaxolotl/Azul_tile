@@ -60,5 +60,6 @@ class Playerboard_screen(Screen):
                                 self.game.current_player = self.game.current_player.get_next_player()
                                 self.game.game_stage = GameStage.GAME_CENTER
 
+
                         except ValueError:
                             print("wrong color")

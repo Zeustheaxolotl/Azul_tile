@@ -156,7 +156,7 @@ class Game:
             overflow = player.overflow
             tiles = overflow.tilerow.flush_tiles()  # this should give back all the tiles that are not the 1st player tile.
             self.tile_bag.tiles.append(tiles)
-           # player.add_to_score(player.tilewall.round_score())
+            player.add_to_score(player.tilewall.get_score())
             end_game = end_game or player.tilewall.is_game_over()
         if end_game:
             # the game is over. Final calculations

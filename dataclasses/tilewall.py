@@ -10,7 +10,6 @@ class Tile_Wall():
     def __init__(self):
         self.rect = None
         self.image = pygame.image.load('img/Tile Wall.png')
-        #self.tiles = [self.row1 == [None, None, None, None], self.row2 == [], self.row3 == [], self.row4 == [], self.row5 == []]
         self.rows = []
         self.colors = ['blue', 'yellow', 'red', 'black', 'teal']
         self.images = ['img/Blue_Tile.png', 'img/Yellow_Tile.png', 'img/Red_Tile.png', 'img/Black_Tile.png', 'img/Teal_Tile.png']
@@ -41,10 +40,79 @@ class Tile_Wall():
             offset_y += 36
 
     def add_tile(self, row, tile):
-        self.rows[row].display_tiles(tile, row)
+        x = self.rows[row].display_tiles(tile, row)
+        self.round_score(row, x)
 
-    def round_score(self):
-        pass
+    def round_score(self, row, place):
+        i = 1
+        x = 1
+        self.score += 1
+        #place = 3
+        keep_adding_right = True
+        keep_adding_left = True
+        keep_adding_up = True
+        keep_adding_down = True
+        tiles = self.rows[row].return_tiles()
+        print(tiles)
+        print("these are the row tiles")
+        #self.score = 1
+        while keep_adding_right:
+            if (place+x) < 5:
+                if tiles[place+x]:
+                    self.score += 1
+                    print('right')
+                    print(self.score)
+                else:
+                    keep_adding_right = False
+                x += 1
+            else:
+                keep_adding_right = False
+        x = 1
+        while keep_adding_left:
+            if (place-x) > -1:
+                if tiles[place-x]:
+                    self.score += 1
+                    print('left')
+                    print(self.score)
+                else:
+                    keep_adding_left = False
+                x += 1
+            else:
+                keep_adding_left = False
+
+        while keep_adding_up:
+            if row-i > -1:
+                tiles = self.rows[row-i].return_tiles()
+                if tiles[place]:
+                    self.score += 1
+                    print('up')
+                    print(self.score)
+                else:
+                    keep_adding_up = False
+            else:
+                keep_adding_up = False
+            i += 1
+
+        i = 1
+
+        while keep_adding_down:
+            if row+i < 5:
+                tiles = self.rows[row+i].return_tiles()
+                if tiles[place]:
+                    self.score += 1
+                    print('down')
+                    print(self.score)
+                else:
+                    keep_adding_down = False
+            else:
+                keep_adding_down = False
+            i += 1
+        #return self.score
+
+    def get_score(self):
+        print(str(self.score) + 'its the self.score final woohoo')
+        return self.score
+
     def is_game_over(self):
         x = 0
         for row in self.rows:

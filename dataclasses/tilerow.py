@@ -88,7 +88,7 @@ class TileRow:
                         del self.tiles[y]
                         self.tiles.insert(y, tile)
                         #print(y)
-
+            return y
 
     def flush_tiles(self):
         """
