@@ -68,9 +68,13 @@ class Player:
     def listen(self, event):
         # listen for the collection area
         row = self.collection_area.listen(event)
+        o_row = self.overflow.listen(event)
         if row:
             return ("row", row)
+        elif o_row:
+            return("row", o_row)
         return ("none", None)
+
 
     def place_overflow(self, tiles):
         if tiles != None:

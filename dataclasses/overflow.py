@@ -53,12 +53,10 @@ class Overflow:
         :return:
         """
         if event.type == pygame.MOUSEBUTTONDOWN:
+            print('here?/?/???')
             x, y = pygame.mouse.get_pos()
-            for tile_row in self.tile_rows:
-                if tile_row.collide_tile_row(x, y):
-                    return tile_row
-                    # if not tile_row.is_full():
-                    #    tile_row.accept_tiles(self.game.selected_tiles)
+            if self.tilerow.collide_tile_row(x, y):
+                return self.tilerow
         return None
 
 
